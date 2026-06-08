@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="E&amp;E Imóveis – Casas, apartamentos e terrenos para compra e locação. Encontre seu imóvel ideal!">
+<meta name="theme-color" content="#1e3a5f">
+<title>E&amp;E Imóveis – Seu lar começa aqui</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--pri:#1e3a5f;--pri2:#2563eb;--acc:#f59e0b;--grn:#16a34a;--wpp:#25d366;--danger:#dc2626;--bg:#f8fafc;--card:#fff;--border:#e2e8f0;--txt:#1e293b;--muted:#64748b;--light:#f1f5f9;--r:12px;--sh:0 4px 20px rgba(0,0,0,.08);--sh2:0 10px 40px rgba(0,0,0,.15);--tr:all .2s ease}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,sans-serif;background:var(--bg);color:var(--txt);line-height:1.6;overflow-x:hidden}
+img{max-width:100%;display:block}a{text-decoration:none;color:inherit}
+button{cursor:pointer;font-family:inherit;border:none;outline:none}
+input,select,textarea{font-family:inherit;outline:none}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--light)}::-webkit-scrollbar-thumb{background:var(--pri);border-radius:3px}
+
+/* Header */
+header{background:var(--pri);position:sticky;top:0;z-index:100;box-shadow:0 2px 20px rgba(0,0,0,.25)}
+.hdr{max-width:1280px;margin:0 auto;padding:0 20px;display:flex;align-items:center;justify-content:space-between;height:66px}
+.logo{display:flex;align-items:center;gap:10px;color:#fff}
+.logo-ic{width:40px;height:40px;background:var(--acc);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:var(--pri);line-height:1}
+.logo-name{font-size:18px;font-weight:800;letter-spacing:-.5px}
+.logo-sub{font-size:10px;color:rgba(255,255,255,.55);font-weight:400}
+.main-nav{display:flex;align-items:center;gap:4px}
+.main-nav a{color:rgba(255,255,255,.75);padding:8px 13px;border-radius:8px;font-size:13.5px;font-weight:500;transition:var(--tr)}
+.main-nav a:hover{background:rgba(255,255,255,.12);color:#fff}
+.btn-wpp-hdr{display:flex;align-items:center;gap:7px;background:var(--wpp);color:#fff;padding:9px 18px;border-radius:25px;font-size:13px;font-weight:700;transition:var(--tr);white-space:nowrap}
+.btn-wpp-hdr:hover{background:#128C7E;transform:translateY(-1px);box-shadow:0 4px 14px rgba(37,211,102,.4)}
+.ham{display:none;background:none;color:#fff;font-size:26px;padding:4px;line-height:1}
+
+/* Mobile menu */
+.mob-menu{display:none;position:fixed;top:66px;left:0;right:0;bottom:0;background:var(--pri);z-index:99;padding:20px;flex-direction:column;gap:6px;overflow-y:auto}
+.mob-menu.open{display:flex}
+.mob-menu a{color:rgba(255,255,255,.85);padding:14px 16px;border-radius:10px;font-size:15px;font-weight:500;border-bottom:1px solid rgba(255,255,255,.08);transition:var(--tr)}
+.mob-menu a:hover{background:rgba(255,255,255,.1);color:#fff}
+
+/* Hero */
+.hero{background:linear-gradient(135deg,#0f2847 0%,#1a4a7a 60%,#0d1f35 100%);padding:68px 20px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1600&auto=format&q=50') center/cover;opacity:.12}
+.hero-c{max-width:800px;margin:0 auto;text-align:center;position:relative}
+.hero h1{font-size:clamp(26px,5vw,50px);font-weight:900;color:#fff;line-height:1.15;margin-bottom:12px;letter-spacing:-1px}
+.hero h1 span{color:var(--acc)}
+.hero p{color:rgba(255,255,255,.72);font-size:clamp(14px,2vw,17px);margin-bottom:32px}
+.sbox{background:#fff;border-radius:14px;padding:18px;box-shadow:var(--sh2)}
+.stabs{display:flex;gap:6px;margin-bottom:14px}
+.stab{flex:1;padding:9px;border-radius:8px;font-size:13px;font-weight:600;background:var(--light);color:var(--muted);border:2px solid transparent;transition:var(--tr)}
+.stab.active{background:var(--pri);color:#fff;border-color:var(--pri)}
+.stab:hover:not(.active){border-color:var(--pri);color:var(--pri)}
+.sfields{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end}
+.sfield{display:flex;flex-direction:column;gap:5px}
+.sfield label{font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.sfield select,.sfield input{padding:10px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:13.5px;color:var(--txt);background:#fff;transition:var(--tr);width:100%}
+.sfield select:focus,.sfield input:focus{border-color:var(--pri2);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.btn-srch{display:flex;align-items:center;gap:8px;background:var(--pri);color:#fff;padding:10px 22px;border-radius:8px;font-size:14px;font-weight:700;transition:var(--tr);white-space:nowrap}
+.btn-srch:hover{background:var(--pri2)}
+
+/* Stats */
+.stats{background:var(--pri)}
+.stats-i{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:repeat(4,1fr)}
+.stat{padding:18px 22px;border-right:1px solid rgba(255,255,255,.1);text-align:center}
+.stat:last-child{border-right:none}
+.stat-n{font-size:26px;font-weight:900;color:var(--acc)}
+.stat-l{font-size:11px;color:rgba(255,255,255,.55);font-weight:500;margin-top:2px}
+
+/* Section */
+.sec{padding:56px 20px}
+.sec-i{max-width:1280px;margin:0 auto}
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;gap:12px;flex-wrap:wrap}
+.sec-ttl{font-size:clamp(20px,3vw,28px);font-weight:800;color:var(--pri);letter-spacing:-.5px}
+.sec-ttl span{color:var(--pri2)}
+.sec-sub{font-size:13px;color:var(--muted);margin-top:4px}
+
+/* Filter bar */
+.fbar{background:#fff;border-radius:var(--r);padding:14px 18px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;border:1px solid var(--border);box-shadow:var(--sh);margin-bottom:26px}
+.fbar input[type=text]{flex:1;min-width:180px;padding:9px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:13.5px;transition:var(--tr)}
+.fbar input:focus{border-color:var(--pri2)}
+.fbar select{padding:9px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;color:var(--txt);background:#fff;cursor:pointer;transition:var(--tr)}
+.fbar select:focus{border-color:var(--pri2)}
+.fcnt{font-size:11.5px;color:var(--muted);font-weight:600;padding:5px 12px;background:var(--light);border-radius:20px;white-space:nowrap}
+
+/* Grid */
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(295px,1fr));gap:22px}
+
+/* Card */
+.pcard{background:var(--card);border-radius:var(--r);overflow:hidden;border:1px solid var(--border);box-shadow:var(--sh);transition:var(--tr)}
+.pcard:hover{transform:translateY(-4px);box-shadow:var(--sh2);border-color:var(--pri2)}
+.cimg{position:relative;height:210px;overflow:hidden;background:#dde;cursor:pointer}
+.cimg img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+.pcard:hover .cimg img{transform:scale(1.06)}
+.bfin{position:absolute;top:10px;left:10px;padding:4px 11px;border-radius:20px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px}
+.bfin.venda{background:var(--pri);color:#fff}
+.bfin.aluguel{background:var(--grn);color:#fff}
+.bdest{position:absolute;top:10px;right:10px;background:var(--acc);color:var(--pri);padding:3px 9px;border-radius:20px;font-size:9.5px;font-weight:800;text-transform:uppercase;letter-spacing:.4px}
+.cbody{padding:16px}
+.ccod{font-size:10px;color:var(--muted);font-weight:600;margin-bottom:5px}
+.ctit{font-size:14.5px;font-weight:700;color:var(--txt);margin-bottom:7px;line-height:1.3;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;cursor:pointer}
+.ctit:hover{color:var(--pri2)}
+.cloc{display:flex;align-items:center;gap:4px;font-size:12px;color:var(--muted);margin-bottom:12px}
+.cspecs{display:flex;flex-wrap:wrap;gap:10px;padding:10px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);margin-bottom:12px}
+.cspec{display:flex;align-items:center;gap:4px;font-size:11.5px;color:var(--muted);font-weight:500}
+.cprice{font-size:21px;font-weight:900;color:var(--pri);letter-spacing:-.4px;margin-bottom:12px}
+.cprice small{font-size:11px;font-weight:500;color:var(--muted);display:block;margin-top:1px}
+.cacts{display:flex;gap:7px}
+.btn-ver{flex:1;padding:9px;border-radius:8px;background:var(--pri);color:#fff;font-size:12px;font-weight:600;transition:var(--tr);text-align:center;border:none}
+.btn-ver:hover{background:var(--pri2)}
+.btn-wc{display:flex;align-items:center;justify-content:center;gap:5px;padding:9px 13px;border-radius:8px;background:var(--wpp);color:#fff;font-size:12px;font-weight:600;transition:var(--tr)}
+.btn-wc:hover{background:#128C7E}
+
+/* Detail Modal */
+.ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.78);z-index:200;overflow-y:auto;padding:16px}
+.ov.open{display:flex;align-items:flex-start;justify-content:center}
+.mbox{background:#fff;border-radius:16px;width:100%;max-width:900px;position:relative;overflow:hidden;animation:sli .25s ease;margin:auto}
+@keyframes sli{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+.mcls{position:absolute;top:12px;right:12px;background:rgba(0,0,0,.45);color:#fff;border-radius:50%;width:36px;height:36px;display:flex;align-items:center;justify-content:center;font-size:20px;z-index:10;transition:var(--tr);border:none}
+.mcls:hover{background:var(--danger)}
+.mgal{position:relative;height:300px;overflow:hidden;background:#111}
+.mgal img{width:100%;height:100%;object-fit:cover}
+.gnav{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.5);color:#fff;border:none;border-radius:50%;width:38px;height:38px;display:flex;align-items:center;justify-content:center;font-size:18px;transition:var(--tr);cursor:pointer}
+.gnav:hover{background:rgba(0,0,0,.8)}
+.gprev{left:10px}.gnext{right:10px}
+.gdots{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);display:flex;gap:5px}
+.gdot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.45);border:none;cursor:pointer;transition:var(--tr)}
+.gdot.on{background:#fff}
+.mbody{padding:24px}
+.mhdr{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:18px;flex-wrap:wrap}
+.mprice{font-size:28px;font-weight:900;color:var(--pri);letter-spacing:-.8px}
+.mprice small{font-size:12px;font-weight:500;color:var(--muted);display:block}
+.mspecs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}
+.mspec{background:var(--light);border-radius:10px;padding:12px;text-align:center}
+.mspec-v{font-size:20px;font-weight:800;color:var(--pri)}
+.mspec-l{font-size:10.5px;color:var(--muted);margin-top:2px}
+.msect{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);margin-bottom:8px;margin-top:18px}
+.mdesc{font-size:13.5px;line-height:1.75;color:var(--txt);white-space:pre-line}
+.mtags{display:flex;flex-wrap:wrap;gap:7px;margin-top:14px}
+.mtag{display:flex;align-items:center;gap:4px;padding:5px 11px;border-radius:20px;background:var(--light);font-size:11.5px;font-weight:500}
+.macts{display:flex;gap:10px;margin-top:22px;flex-wrap:wrap}
+.btn-mwpp{flex:1;display:flex;align-items:center;justify-content:center;gap:8px;background:var(--wpp);color:#fff;padding:14px;border-radius:10px;font-size:14px;font-weight:700;transition:var(--tr);min-width:180px;border:none}
+.btn-mwpp:hover{background:#128C7E;transform:translateY(-2px);box-shadow:0 5px 16px rgba(37,211,102,.4)}
+.btn-shr{display:flex;align-items:center;justify-content:center;gap:7px;padding:14px 18px;border-radius:10px;background:var(--light);color:var(--txt);font-size:13.5px;font-weight:600;transition:var(--tr);border:1.5px solid var(--border)}
+.btn-shr:hover{border-color:var(--wpp);color:var(--wpp)}
+.btn-edt{padding:14px 18px;border-radius:10px;background:var(--pri);color:#fff;font-size:13.5px;font-weight:600;transition:var(--tr);border:none}
+.btn-edt:hover{background:var(--pri2)}
+
+/* Form Modal */
+.fov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:300;overflow-y:auto;padding:16px}
+.fov.open{display:flex;align-items:flex-start;justify-content:center}
+.fbox{background:#fff;border-radius:16px;width:100%;max-width:720px;padding:26px;animation:sli .25s ease;margin:auto}
+.fttl{font-size:19px;font-weight:800;color:var(--pri);margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.fgrid{display:flex;flex-direction:column;gap:14px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.frow3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.frow4{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:12px}
+.fg{display:flex;flex-direction:column;gap:4px}
+.fl{font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+.fc{padding:10px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:13.5px;color:var(--txt);background:#fff;transition:var(--tr);width:100%}
+.fc:focus{border-color:var(--pri2);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+textarea.fc{resize:vertical;min-height:90px}
+.sdiv{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--pri);padding:5px 11px;background:rgba(37,99,235,.06);border-left:3px solid var(--pri);border-radius:0 6px 6px 0;margin:4px 0}
+.btn-ai{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,#7c3aed,#a855f7);color:#fff;padding:9px 16px;border-radius:8px;font-size:12.5px;font-weight:700;transition:var(--tr);border:none}
+.btn-ai:hover{transform:translateY(-1px);box-shadow:0 4px 14px rgba(124,58,237,.35)}
+.btn-ai:disabled{opacity:.6;pointer-events:none}
+.spin{width:13px;height:13px;border:2px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:rot .7s linear infinite;display:none}
+.btn-ai.ld .spin{display:inline-block}
+.btn-ai.ld .ai-icon{display:none}
+@keyframes rot{to{transform:rotate(360deg)}}
+.chars-g{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.chi{display:flex;align-items:center;gap:6px;font-size:12.5px;cursor:pointer;padding:5px 7px;border-radius:6px;transition:var(--tr)}
+.chi:hover{background:var(--light)}
+.chi input{accent-color:var(--pri2);width:14px;height:14px}
+.facts{display:flex;gap:10px;margin-top:18px;justify-content:flex-end;flex-wrap:wrap}
+.btn-sv{padding:11px 26px;background:var(--pri);color:#fff;border-radius:8px;font-size:14px;font-weight:700;transition:var(--tr);border:none}
+.btn-sv:hover{background:var(--pri2)}
+.btn-cn{padding:11px 18px;background:var(--light);color:var(--txt);border-radius:8px;font-size:14px;font-weight:600;border:1.5px solid var(--border);transition:var(--tr)}
+.btn-cn:hover{border-color:var(--danger);color:var(--danger)}
+
+/* Contact */
+.csec{background:linear-gradient(135deg,var(--pri),#1a4a7a);padding:60px 20px;text-align:center}
+.csec h2{font-size:clamp(22px,4vw,36px);font-weight:900;color:#fff;margin-bottom:10px}
+.csec p{color:rgba(255,255,255,.72);font-size:15px;margin-bottom:28px}
+.cbts{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-bwpp{display:flex;align-items:center;gap:10px;background:var(--wpp);color:#fff;padding:15px 30px;border-radius:14px;font-size:16px;font-weight:800;transition:var(--tr);box-shadow:0 4px 20px rgba(37,211,102,.3);border:none}
+.btn-bwpp:hover{transform:translateY(-3px);box-shadow:0 8px 30px rgba(37,211,102,.5)}
+
+/* Footer */
+footer{background:var(--pri);padding:40px 20px 22px}
+.fi{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr;gap:36px}
+.flogo{font-size:22px;font-weight:900;color:#fff;margin-bottom:9px}
+.flogo span{color:var(--acc)}
+.fdesc{font-size:12.5px;color:rgba(255,255,255,.5);line-height:1.7}
+.fcol h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.9px;color:rgba(255,255,255,.45);margin-bottom:12px}
+.fcol a{display:block;color:rgba(255,255,255,.6);font-size:12.5px;margin-bottom:7px;transition:var(--tr)}
+.fcol a:hover{color:#fff}
+.fbot{max-width:1280px;margin:28px auto 0;padding-top:18px;border-top:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.fbot p{font-size:11.5px;color:rgba(255,255,255,.35)}
+
+/* FAB */
+.fab{position:fixed;bottom:22px;right:22px;display:flex;flex-direction:column;gap:10px;z-index:150;align-items:flex-end}
+.fab-wpp{display:flex;align-items:center;gap:8px;background:var(--wpp);color:#fff;padding:13px 18px;border-radius:50px;font-size:14px;font-weight:700;box-shadow:0 4px 18px rgba(37,211,102,.5);transition:var(--tr);border:none}
+.fab-wpp:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(37,211,102,.6)}
+.fab-add{display:flex;align-items:center;justify-content:center;background:var(--acc);color:var(--pri);width:48px;height:48px;border-radius:50%;font-size:26px;font-weight:900;box-shadow:0 4px 14px rgba(245,158,11,.4);transition:var(--tr);border:none;line-height:1}
+.fab-add:hover{transform:rotate(45deg) scale(1.1)}
+
+/* Empty */
+.empty{text-align:center;padding:56px 20px;color:var(--muted)}
+.empty h3{font-size:18px;font-weight:700;margin-bottom:7px;color:var(--txt)}
+.empty p{font-size:13.5px}
+
+/* Toast */
+.tct{position:fixed;bottom:22px;left:22px;z-index:600;display:flex;flex-direction:column;gap:7px}
+.toast{background:var(--pri);color:#fff;padding:11px 18px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:var(--sh2);animation:sli .25s ease;max-width:280px}
+.toast.ok{background:var(--grn)}.toast.err{background:var(--danger)}
+
+/* Confirm */
+.cov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:400;align-items:center;justify-content:center}
+.cov.open{display:flex}
+.cbox{background:#fff;border-radius:14px;padding:28px;max-width:380px;width:90%;text-align:center;animation:sli .2s ease}
+.cbox h3{font-size:17px;font-weight:800;margin-bottom:8px}
+.cbox p{font-size:13.5px;color:var(--muted);margin-bottom:22px}
+.cbox-acts{display:flex;gap:10px;justify-content:center}
+.btn-cno{padding:10px 22px;background:var(--light);color:var(--txt);border-radius:8px;font-weight:600;font-size:13.5px;border:1.5px solid var(--border)}
+.btn-cyes{padding:10px 22px;background:var(--danger);color:#fff;border-radius:8px;font-weight:700;font-size:13.5px;border:none}
+
+/* About */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.about-img{border-radius:16px;overflow:hidden;height:300px}
+.about-img img{width:100%;height:100%;object-fit:cover}
+.about-txt h2{font-size:26px;font-weight:800;color:var(--pri);margin-bottom:14px}
+.about-txt p{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:12px}
+.about-features{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.af{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:600;color:var(--txt)}
+.af-dot{width:8px;height:8px;border-radius:50%;background:var(--grn);flex-shrink:0}
+
+/* Responsive */
+@media(max-width:960px){
+  .stats-i{grid-template-columns:repeat(2,1fr)}
+  .mspecs{grid-template-columns:repeat(2,1fr)}
+  .fi{grid-template-columns:1fr 1fr}
+  .fi .flogo-wrap{grid-column:1/-1}
+  .sfields{grid-template-columns:1fr 1fr}
+  .btn-srch{grid-column:1/-1;justify-content:center}
+  .about-grid{grid-template-columns:1fr}
+  .about-img{height:220px}
+}
+@media(max-width:640px){
+  .main-nav,.btn-wpp-hdr{display:none}
+  .ham{display:flex;align-items:center}
+  .hero{padding:48px 14px}
+  .sec{padding:38px 14px}
+  .sfields{grid-template-columns:1fr}
+  .mspecs{grid-template-columns:repeat(2,1fr)}
+  .mbody{padding:16px}
+  .mgal{height:220px}
+  .frow,.frow3,.frow4{grid-template-columns:1fr}
+  .chars-g{grid-template-columns:repeat(2,1fr)}
+  .fi{grid-template-columns:1fr;gap:22px}
+  .pgrid{grid-template-columns:1fr}
+  .fbar{flex-direction:column}
+  .fbar input,.fbar select{width:100%}
+  .fab-wpp span{display:none}
+  .fab-wpp{padding:14px;border-radius:50%}
+  .stats-i{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="hdr">
+    <a href="#" class="logo" onclick="window.scrollTo({top:0,behavior:'smooth'});return false">
+      <div class="logo-ic">E&amp;E</div>
+      <div>
+        <div class="logo-name">E&amp;E Imóveis</div>
+        <div class="logo-sub">Seu lar começa aqui</div>
+      </div>
+    </a>
+    <nav class="main-nav">
+      <a href="#imoveis">Imóveis</a>
+      <a href="#sobre">Sobre Nós</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <button class="btn-wpp-hdr" onclick="contactWpp(null)">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Fale Conosco
+    </button>
+    <button class="ham" onclick="toggleMenu()" aria-label="Menu">&#9776;</button>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mob-menu" id="mobMenu">
+  <a href="#imoveis" onclick="closeMenu()">🏠 Imóveis</a>
+  <a href="#sobre" onclick="closeMenu()">ℹ️ Sobre Nós</a>
+  <a href="#contato" onclick="closeMenu()">📞 Contato</a>
+  <a href="#" onclick="contactWpp(null);closeMenu();return false">💬 Falar no WhatsApp</a>
+  <a href="#" onclick="openForm(null);closeMenu();return false">➕ Adicionar Imóvel</a>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-c">
+    <h1>Encontre seu <span>imóvel ideal</span><br>com quem entende</h1>
+    <p>Casas, apartamentos, terrenos e mais. Compra, venda e locação com atendimento personalizado.</p>
+    <div class="sbox">
+      <div class="stabs">
+        <button class="stab active" onclick="setTab(this,'')">Todos</button>
+        <button class="stab" onclick="setTab(this,'Venda')">Comprar</button>
+        <button class="stab" onclick="setTab(this,'Aluguel')">Alugar</button>
+      </div>
+      <div class="sfields">
+        <div class="sfield"><label>Tipo</label>
+          <select id="hTipo"><option value="">Todos os tipos</option><option>Casa</option><option>Apartamento</option><option>Terreno</option><option>Sala Comercial</option><option>Loja</option></select>
+        </div>
+        <div class="sfield"><label>Bairro / Cidade</label>
+          <input type="text" id="hLocal" placeholder="Ex: Centro, São Paulo">
+        </div>
+        <div class="sfield"><label>Quartos</label>
+          <select id="hQto"><option value="">Qualquer</option><option value="1">1+</option><option value="2">2+</option><option value="3">3+</option><option value="4">4+</option></select>
+        </div>
+        <button class="btn-srch" onclick="heroSearch()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          Buscar
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats"><div class="stats-i" id="statsBar"></div></div>
+
+<!-- Featured -->
+<section class="sec" style="background:#fff" id="destaques">
+  <div class="sec-i">
+    <div class="sec-hdr">
+      <div>
+        <div class="sec-ttl">Imóveis em <span>Destaque</span></div>
+        <div class="sec-sub">Selecionados especialmente para você</div>
+      </div>
+    </div>
+    <div class="pgrid" id="featGrid"></div>
+  </div>
+</section>
+
+<!-- All Properties -->
+<section class="sec" id="imoveis">
+  <div class="sec-i">
+    <div class="sec-hdr">
+      <div>
+        <div class="sec-ttl">Todos os <span>Imóveis</span></div>
+        <div class="sec-sub">Encontre o imóvel perfeito para você</div>
+      </div>
+      <button class="btn-sv" style="display:flex;align-items:center;gap:7px" onclick="openForm(null)">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+        Adicionar Imóvel
+      </button>
+    </div>
+    <div class="fbar">
+      <input type="text" id="fSrch" placeholder="🔍  Buscar por nome, bairro ou cidade..." oninput="applyFilters()">
+      <select id="fTipo" onchange="applyFilters()"><option value="">Tipo: Todos</option><option>Casa</option><option>Apartamento</option><option>Terreno</option><option>Sala Comercial</option><option>Loja</option></select>
+      <select id="fFin" onchange="applyFilters()"><option value="">Compra e Aluguel</option><option value="Venda">Venda</option><option value="Aluguel">Aluguel</option></select>
+      <select id="fQto" onchange="applyFilters()"><option value="">Quartos: Todos</option><option value="1">1+ quarto</option><option value="2">2+ quartos</option><option value="3">3+ quartos</option><option value="4">4+ quartos</option></select>
+      <select id="fPrc" onchange="applyFilters()"><option value="">Preço: Todos</option><option value="0-200000">Até R$ 200 mil</option><option value="200000-500000">R$ 200k – 500k</option><option value="500000-1000000">R$ 500k – 1M</option><option value="1000000-9e9">Acima de R$ 1M</option><option value="aluguel-2000">Aluguel até R$ 2.000</option><option value="aluguel-5000">Aluguel até R$ 5.000</option></select>
+      <span class="fcnt" id="fcnt">0 imóveis</span>
+    </div>
+    <div class="pgrid" id="mainGrid"></div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section class="csec" id="contato">
+  <h2>Pronto para encontrar<br>seu imóvel dos sonhos?</h2>
+  <p>Nossa equipe está pronta para te atender. Fale conosco agora pelo WhatsApp!</p>
+  <div class="cbts">
+    <button class="btn-bwpp" onclick="contactWpp(null)">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Falar com Consultor
+    </button>
+  </div>
+</section>
+
+<!-- About -->
+<section class="sec" id="sobre" style="background:#fff">
+  <div class="sec-i">
+    <div class="about-grid">
+      <div class="about-txt">
+        <h2>Sobre a E&amp;E Imóveis</h2>
+        <p>Somos uma imobiliária comprometida em realizar o sonho do imóvel ideal para cada cliente. Com atendimento personalizado e profissional, ajudamos você em todas as etapas — da busca à assinatura do contrato.</p>
+        <p>Nossa equipe de corretores especializados conhece profundamente o mercado local e está sempre pronta para oferecer as melhores oportunidades de compra, venda e locação.</p>
+        <div class="about-features">
+          <div class="af"><div class="af-dot"></div>Atendimento personalizado</div>
+          <div class="af"><div class="af-dot"></div>Corretores experientes</div>
+          <div class="af"><div class="af-dot"></div>Portfólio variado</div>
+          <div class="af"><div class="af-dot"></div>Suporte completo</div>
+          <div class="af"><div class="af-dot"></div>Negociação transparente</div>
+          <div class="af"><div class="af-dot"></div>Agilidade no processo</div>
+        </div>
+      </div>
+      <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=700&auto=format&q=80" alt="Equipe E&E Imóveis">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="fi">
+    <div class="flogo-wrap">
+      <div class="flogo">E&amp;E <span>Imóveis</span></div>
+      <p class="fdesc">Seu parceiro de confiança no mercado imobiliário. Realizando sonhos com seriedade e compromisso desde 2024.</p>
+    </div>
+    <div class="fcol">
+      <h4>Navegação</h4>
+      <a href="#imoveis">Imóveis</a>
+      <a href="#destaques">Destaques</a>
+      <a href="#sobre">Sobre Nós</a>
+      <a href="#contato">Contato</a>
+    </div>
+    <div class="fcol">
+      <h4>Fale Conosco</h4>
+      <a href="#" onclick="contactWpp(null);return false">📱 WhatsApp</a>
+      <a href="#imoveis" onclick="openForm(null);return false">➕ Cadastrar Imóvel</a>
+    </div>
+  </div>
+  <div class="fbot">
+    <p>© 2024 E&amp;E Imóveis. Todos os direitos reservados.</p>
+    <p>Desenvolvido com ❤️</p>
+  </div>
+</footer>
+
+<!-- Property Detail Modal -->
+<div class="ov" id="detailOv" onclick="ovClick(event,'detailOv')">
+  <div class="mbox" id="detailBox"></div>
+</div>
+
+<!-- Form Modal -->
+<div class="fov" id="formOv" onclick="ovClick(event,'formOv')">
+  <div class="fbox" id="formBox"></div>
+</div>
+
+<!-- Confirm Modal -->
+<div class="cov" id="confirmOv">
+  <div class="cbox">
+    <h3>Excluir imóvel</h3>
+    <p>Tem certeza? Esta ação não pode ser desfeita.</p>
+    <div class="cbox-acts">
+      <button class="btn-cno" onclick="closeConfirm()">Cancelar</button>
+      <button class="btn-cyes" id="btnDel">Excluir</button>
+    </div>
+  </div>
+</div>
+
+<!-- FAB -->
+<div class="fab">
+  <button class="fab-wpp" onclick="contactWpp(null)">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <span>WhatsApp</span>
+  </button>
+  <button class="fab-add" onclick="openForm(null)" title="Adicionar imóvel">+</button>
+</div>
+
+<!-- Toast -->
+<div class="tct" id="tct"></div>
+
+<script>
+/* ═══════════════════════════════════════════
+   CONFIGURAÇÃO — edite aqui
+   ═══════════════════════════════════════════ */
+const CFG = {
+  whatsapp: '5511999999999',   // ← coloque o número com código do país (55) + DDD
+  nome: 'E&E Imóveis',
+  siteUrl: 'https://heavy-metal-tech.github.io/edna-eduardo.github.io'
+};
+
+/* ═══════════════════════════════════════════
+   DADOS PADRÃO (imóveis de exemplo)
+   ═══════════════════════════════════════════ */
+const DEFAULT_PROPS = [
+  {
+    id:1, codigo:'EE001',
+    titulo:'Casa com Piscina no Jardim das Flores',
+    tipo:'Casa', finalidade:'Venda',
+    preco:750000, area:280, quartos:4, suites:2, banheiros:3, vagas:3,
+    bairro:'Jardim das Flores', cidade:'São Paulo', estado:'SP',
+    fotos:['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&auto=format&q=80','https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&auto=format&q=80','https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&auto=format&q=80'],
+    caracteristicas:['Piscina','Churrasqueira','Jardim','Portão Eletrônico','Câmeras de Segurança','Closet'],
+    descricao:'Excelente casa de alto padrão localizada no bairro Jardim das Flores, São Paulo/SP.\n\nO imóvel oferece 280m² de área, 4 quartos (sendo 2 suítes), 3 banheiros e 3 vagas de garagem, proporcionando muito conforto e praticidade para toda a família.\n\nCom infraestrutura de qualidade, o imóvel conta com: piscina, churrasqueira, jardim, portão eletrônico e câmeras de segurança.\n\nSituado em localização privilegiada, próximo a escolas, comércio, transporte público e demais serviços essenciais.\n\nNão perca esta oportunidade! Entre em contato e agende sua visita sem compromisso!',
+    destaque:true, condominio:null, iptu:620, ativo:true, dataCadastro:'2024-10-01'
+  },
+  {
+    id:2, codigo:'EE002',
+    titulo:'Apartamento Moderno com Vista Panorâmica',
+    tipo:'Apartamento', finalidade:'Venda',
+    preco:485000, area:120, quartos:3, suites:1, banheiros:2, vagas:2,
+    bairro:'Centro', cidade:'São Paulo', estado:'SP',
+    fotos:['https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&auto=format&q=80','https://images.unsplash.com/photo-1554995207-c18c203602cb?w=800&auto=format&q=80'],
+    caracteristicas:['Varanda Gourmet','Academia','Salão de Festas','Portaria 24h','Elevador'],
+    descricao:'Magnífico apartamento à venda no centro de São Paulo/SP.\n\nO imóvel oferece 120m² de área, 3 quartos (sendo 1 suíte), 2 banheiros e 2 vagas de garagem.\n\nCom infraestrutura de qualidade, o condomínio conta com: varanda gourmet, academia, salão de festas e portaria 24h.\n\nLocalização central, próximo a tudo. Imóvel em excelente estado de conservação. Agende sua visita!',
+    destaque:true, condominio:800, iptu:340, ativo:true, dataCadastro:'2024-10-05'
+  },
+  {
+    id:3, codigo:'EE003',
+    titulo:'Casa em Condomínio Fechado – Pronta para Morar',
+    tipo:'Casa', finalidade:'Aluguel',
+    preco:3800, area:180, quartos:3, suites:1, banheiros:2, vagas:2,
+    bairro:'Alphaville', cidade:'Barueri', estado:'SP',
+    fotos:['https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&auto=format&q=80','https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&auto=format&q=80'],
+    caracteristicas:['Condomínio Fechado','Playground','Área de Lazer','Segurança 24h'],
+    descricao:'Ótima casa para alugar em condomínio fechado em Alphaville, Barueri/SP.\n\nO imóvel oferece 180m² de área, 3 quartos (sendo 1 suíte), 2 banheiros e 2 vagas de garagem.\n\nCondomínio com área de lazer completa: playground, piscina e segurança 24 horas.\n\nPerfeita para famílias que buscam segurança e qualidade de vida. Entre em contato para agendar sua visita!',
+    destaque:true, condominio:1200, iptu:null, ativo:true, dataCadastro:'2024-10-10'
+  },
+  {
+    id:4, codigo:'EE004',
+    titulo:'Apartamento Aconchegante 2 Quartos',
+    tipo:'Apartamento', finalidade:'Aluguel',
+    preco:1850, area:75, quartos:2, suites:0, banheiros:1, vagas:1,
+    bairro:'Moema', cidade:'São Paulo', estado:'SP',
+    fotos:['https://images.unsplash.com/photo-1536376072261-38c75010e6c9?w=800&auto=format&q=80'],
+    caracteristicas:['Mobiliado','Próximo ao Metrô','Área de Serviço'],
+    descricao:'Apartamento aconchegante para alugar no bairro Moema, São Paulo/SP.\n\nO imóvel oferece 75m² de área, 2 quartos, 1 banheiro e 1 vaga de garagem.\n\nImóvel mobiliado e pronto para morar! Próximo ao metrô, facilitando seu deslocamento diário.\n\nExcelente custo-benefício. Entre em contato agora!',
+    destaque:false, condominio:350, iptu:null, ativo:true, dataCadastro:'2024-10-12'
+  },
+  {
+    id:5, codigo:'EE005',
+    titulo:'Terreno Residencial em Localização Privilegiada',
+    tipo:'Terreno', finalidade:'Venda',
+    preco:185000, area:300, quartos:0, suites:0, banheiros:0, vagas:0,
+    bairro:'Jardim América', cidade:'São Paulo', estado:'SP',
+    fotos:['https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&q=80'],
+    caracteristicas:['Escriturado','Plano','Infraestrutura Completa','Próximo ao Comércio'],
+    descricao:'Terreno residencial à venda no bairro Jardim América, São Paulo/SP.\n\nO terreno conta com 300m² de área, ideal para construção residencial. Terreno plano, escriturado e com toda infraestrutura de rua: água, luz e esgoto.\n\nLocalização privilegiada, próximo a escolas, comércio e transporte público. Excelente oportunidade de investimento!\n\nDocumentação em dia. Entre em contato para mais informações!',
+    destaque:false, condominio:null, iptu:180, ativo:true, dataCadastro:'2024-10-15'
+  },
+  {
+    id:6, codigo:'EE006',
+    titulo:'Casa com Edícula – Excelente para Família',
+    tipo:'Casa', finalidade:'Venda',
+    preco:420000, area:220, quartos:3, suites:0, banheiros:2, vagas:2,
+    bairro:'Vila Maria', cidade:'São Paulo', estado:'SP',
+    fotos:['https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&auto=format&q=80'],
+    caracteristicas:['Edícula','Quintal','Churrasqueira','Portão Automático'],
+    descricao:'Ótima casa à venda no bairro Vila Maria, São Paulo/SP.\n\nO imóvel oferece 220m² de área, 3 quartos, 2 banheiros e 2 vagas de garagem, além de edícula completa no fundo.\n\nCom churrasqueira, quintal espaçoso e portão automático. Imóvel em excelente estado, pronto para morar.\n\nNão perca esta oportunidade! Agende sua visita pelo WhatsApp!',
+    destaque:false, condominio:null, iptu:390, ativo:true, dataCadastro:'2024-10-18'
+  }
+];
+
+/* ═══════════════════════════════════════════
+   ESTADO
+   ═══════════════════════════════════════════ */
+let props = [];
+let currentGalIdx = 0;
+let currentDetailId = null;
+let heroFinalidade = '';
+let deleteId = null;
+
+/* ═══════════════════════════════════════════
+   LOCALSTORAGE
+   ═══════════════════════════════════════════ */
+function loadProps(){
+  try{
+    const raw = localStorage.getItem('ee_imoveis');
+    if(raw){ props = JSON.parse(raw); }
+    else { props = JSON.parse(JSON.stringify(DEFAULT_PROPS)); saveProps(); }
+  } catch(e){ props = JSON.parse(JSON.stringify(DEFAULT_PROPS)); }
+}
+function saveProps(){ localStorage.setItem('ee_imoveis', JSON.stringify(props)); }
+
+/* ═══════════════════════════════════════════
+   FORMATAÇÃO
+   ═══════════════════════════════════════════ */
+function fmtPrice(p, fin){
+  if(!p) return 'Consulte';
+  const v = 'R$ ' + p.toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0});
+  return fin === 'Aluguel' ? v + '<small>/mês</small>' : v;
+}
+function fmtPricePlain(p, fin){
+  if(!p) return 'Consulte';
+  const v = 'R$ ' + p.toLocaleString('pt-BR',{minimumFractionDigits:0,maximumFractionDigits:0});
+  return fin === 'Aluguel' ? v + '/mês' : v;
+}
+function esc(s){ const d=document.createElement('div'); d.textContent=s||''; return d.innerHTML; }
+function nextId(){ return props.length ? Math.max(...props.map(p=>p.id)) + 1 : 1; }
+function nextCod(){ const n = props.length ? Math.max(...props.map(p=>parseInt(p.codigo.replace('EE',''))||0)) + 1 : 1; return 'EE' + String(n).padStart(3,'0'); }
+
+/* ═══════════════════════════════════════════
+   CARD HTML
+   ═══════════════════════════════════════════ */
+function cardHtml(im){
+  const foto = (im.fotos && im.fotos.length) ? im.fotos[0] : 'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&auto=format&q=70';
+  const specs = [];
+  if(im.quartos) specs.push(`<div class="cspec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>${im.quartos} qto${im.quartos>1?'s':''}</div>`);
+  if(im.banheiros) specs.push(`<div class="cspec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M4 12a2 2 0 01-2-2V6a2 2 0 012-2h4"/><rect x="2" y="12" width="20" height="8" rx="2"/></svg>${im.banheiros} ban${im.banheiros>1?'s':''}</div>`);
+  if(im.vagas) specs.push(`<div class="cspec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="10" rx="1"/><path d="M3 11l2-7h14l2 7"/><path d="M8 20v1m8-1v1"/></svg>${im.vagas} vaga${im.vagas>1?'s':''}</div>`);
+  if(im.area) specs.push(`<div class="cspec"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M9 3v18M15 3v18M3 9h18M3 15h18"/></svg>${im.area}m²</div>`);
+  return `<div class="pcard" data-id="${im.id}">
+    <div class="cimg" onclick="openDetail(${im.id})">
+      <img src="${esc(foto)}" alt="${esc(im.titulo)}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=600&auto=format&q=70'">
+      <span class="bfin ${im.finalidade==='Venda'?'venda':'aluguel'}">${esc(im.finalidade)}</span>
+      ${im.destaque?'<span class="bdest">★ Destaque</span>':''}
+    </div>
+    <div class="cbody">
+      <div class="ccod">${esc(im.codigo)}</div>
+      <div class="ctit" onclick="openDetail(${im.id})">${esc(im.titulo)}</div>
+      <div class="cloc">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        ${esc([im.bairro,im.cidade].filter(Boolean).join(', '))}
+      </div>
+      <div class="cspecs">${specs.join('')}</div>
+      <div class="cprice">${fmtPrice(im.preco, im.finalidade)}</div>
+      <div class="cacts">
+        <button class="btn-ver" onclick="openDetail(${im.id})">Ver Detalhes</button>
+        <button class="btn-wc" onclick="contactWpp(${im.id})">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </button>
+      </div>
+    </div>
+  </div>`;
+}
+
+/* ═══════════════════════════════════════════
+   RENDER
+   ═══════════════════════════════════════════ */
+function renderAll(){
+  renderStats();
+  renderFeatured();
+  applyFilters();
+}
+
+function renderStats(){
+  const total = props.filter(p=>p.ativo).length;
+  const vendas = props.filter(p=>p.ativo&&p.finalidade==='Venda').length;
+  const alugueis = props.filter(p=>p.ativo&&p.finalidade==='Aluguel').length;
+  const dest = props.filter(p=>p.ativo&&p.destaque).length;
+  document.getElementById('statsBar').innerHTML = `
+    <div class="stat"><div class="stat-n">${total}</div><div class="stat-l">Imóveis no Portfólio</div></div>
+    <div class="stat"><div class="stat-n">${vendas}</div><div class="stat-l">À Venda</div></div>
+    <div class="stat"><div class="stat-n">${alugueis}</div><div class="stat-l">Para Alugar</div></div>
+    <div class="stat"><div class="stat-n">${dest}</div><div class="stat-l">Em Destaque</div></div>
+  `;
+}
+
+function renderFeatured(){
+  const list = props.filter(p=>p.ativo&&p.destaque);
+  const el = document.getElementById('featGrid');
+  if(!list.length){ el.innerHTML='<p style="color:var(--muted);font-size:14px">Nenhum imóvel em destaque.</p>'; return; }
+  el.innerHTML = list.map(cardHtml).join('');
+}
+
+function applyFilters(){
+  const q = (document.getElementById('fSrch').value||'').toLowerCase();
+  const tipo = document.getElementById('fTipo').value;
+  const fin = document.getElementById('fFin').value;
+  const qto = parseInt(document.getElementById('fQto').value)||0;
+  const prc = document.getElementById('fPrc').value;
+
+  let list = props.filter(p=>{
+    if(!p.ativo) return false;
+    if(tipo && p.tipo!==tipo) return false;
+    if(fin && p.finalidade!==fin) return false;
+    if(qto && (p.quartos||0)<qto) return false;
+    if(q){
+      const hay = [p.titulo,p.bairro,p.cidade,p.tipo,p.descricao].join(' ').toLowerCase();
+      if(!hay.includes(q)) return false;
+    }
+    if(prc){
+      if(prc==='aluguel-2000'){ if(p.finalidade!=='Aluguel'||p.preco>2000) return false; }
+      else if(prc==='aluguel-5000'){ if(p.finalidade!=='Aluguel'||p.preco>5000) return false; }
+      else {
+        const [mn,mx] = prc.split('-').map(Number);
+        if(p.preco<mn||p.preco>mx) return false;
+      }
+    }
+    return true;
+  });
+
+  list.sort((a,b)=>(b.destaque?1:0)-(a.destaque?1:0)||(new Date(b.dataCadastro))-(new Date(a.dataCadastro)));
+
+  const el = document.getElementById('mainGrid');
+  document.getElementById('fcnt').textContent = list.length + (list.length===1?' imóvel':' imóveis');
+  if(!list.length){
+    el.innerHTML=`<div class="empty" style="grid-column:1/-1"><svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="margin:0 auto 16px;opacity:.25"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9,22 9,12 15,12 15,22"/></svg><h3>Nenhum imóvel encontrado</h3><p>Tente outros filtros ou adicione um novo imóvel.</p></div>`;
+    return;
+  }
+  el.innerHTML = list.map(cardHtml).join('');
+}
+
+/* ═══════════════════════════════════════════
+   DETAIL MODAL
+   ═══════════════════════════════════════════ */
+function openDetail(id){
+  const im = props.find(p=>p.id===id);
+  if(!im) return;
+  currentDetailId = id;
+  currentGalIdx = 0;
+  const fotos = (im.fotos&&im.fotos.length) ? im.fotos : ['https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&auto=format&q=80'];
+  const tags = (im.caracteristicas||[]).map(c=>`<div class="mtag">✓ ${esc(c)}</div>`).join('');
+  const specRows = [];
+  if(im.quartos) specRows.push(`<div class="mspec"><div class="mspec-v">${im.quartos}</div><div class="mspec-l">Quarto${im.quartos>1?'s':''}</div></div>`);
+  if(im.suites) specRows.push(`<div class="mspec"><div class="mspec-v">${im.suites}</div><div class="mspec-l">Suíte${im.suites>1?'s':''}</div></div>`);
+  if(im.banheiros) specRows.push(`<div class="mspec"><div class="mspec-v">${im.banheiros}</div><div class="mspec-l">Banheiro${im.banheiros>1?'s':''}</div></div>`);
+  if(im.vagas) specRows.push(`<div class="mspec"><div class="mspec-v">${im.vagas}</div><div class="mspec-l">Vaga${im.vagas>1?'s':''}</div></div>`);
+  if(im.area) specRows.push(`<div class="mspec"><div class="mspec-v">${im.area}</div><div class="mspec-l">m²</div></div>`);
+  const dotsHtml = fotos.length>1 ? fotos.map((_,i)=>`<button class="gdot ${i===0?'on':''}" onclick="goGal(${i})"></button>`).join('') : '';
+  const extras = [];
+  if(im.condominio) extras.push(`Cond.: R$ ${im.condominio.toLocaleString('pt-BR')}/mês`);
+  if(im.iptu) extras.push(`IPTU: R$ ${im.iptu.toLocaleString('pt-BR')}/ano`);
+
+  document.getElementById('detailBox').innerHTML = `
+    <button class="mcls" onclick="closeDetail()">✕</button>
+    <div class="mgal">
+      <img id="galImg" src="${esc(fotos[0])}" alt="${esc(im.titulo)}" onerror="this.src='https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&auto=format&q=80'">
+      ${fotos.length>1?`<button class="gnav gprev" onclick="goGal(${'{'}Math.max(0,currentGalIdx-1){'}'})">&#8249;</button><button class="gnav gnext" onclick="goGal(${'{'}Math.min(${fotos.length-1},currentGalIdx+1){'}'})">&#8250;</button><div class="gdots">${dotsHtml}</div>`:''}
+    </div>
+    <div class="mbody">
+      <div class="mhdr">
+        <div>
+          <div style="font-size:11px;color:var(--muted);font-weight:600;margin-bottom:4px">${esc(im.codigo)} · ${esc(im.tipo)}</div>
+          <div style="font-size:18px;font-weight:800;color:var(--txt);margin-bottom:4px">${esc(im.titulo)}</div>
+          <div style="font-size:13px;color:var(--muted);display:flex;align-items:center;gap:4px">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            ${esc([im.bairro,im.cidade,im.estado].filter(Boolean).join(', '))}
+          </div>
+        </div>
+        <div style="text-align:right">
+          <div class="mprice">${fmtPrice(im.preco,im.finalidade)}</div>
+          ${extras.length?`<small style="font-size:11px;color:var(--muted)">${extras.join(' · ')}</small>`:''}
+          <span style="display:inline-block;margin-top:6px;padding:3px 10px;border-radius:20px;font-size:10.5px;font-weight:700;background:${im.finalidade==='Venda'?'var(--pri)':'var(--grn)'};color:#fff">${esc(im.finalidade)}</span>
+        </div>
+      </div>
+      ${specRows.length?`<div class="mspecs">${specRows.join('')}</div>`:''}
+      ${im.descricao?`<div class="msect">Descrição</div><div class="mdesc">${esc(im.descricao)}</div>`:''}
+      ${tags?`<div class="msect" style="margin-top:16px">Características</div><div class="mtags">${tags}</div>`:''}
+      <div class="macts">
+        <button class="btn-mwpp" onclick="contactWpp(${im.id})">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Tenho Interesse – WhatsApp
+        </button>
+        <button class="btn-shr" onclick="shareWpp(${im.id})">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Compartilhar
+        </button>
+        <button class="btn-edt" onclick="closeDetail();openForm(${im.id})">✏️ Editar</button>
+      </div>
+    </div>`;
+
+  document.getElementById('detailOv').classList.add('open');
+  document.body.style.overflow='hidden';
+  window._galFotos = fotos;
+}
+
+function goGal(i){
+  const fotos = window._galFotos||[];
+  if(i<0||i>=fotos.length) return;
+  currentGalIdx = i;
+  document.getElementById('galImg').src = fotos[i];
+  document.querySelectorAll('.gdot').forEach((d,j)=>d.classList.toggle('on',j===i));
+}
+
+function closeDetail(){
+  document.getElementById('detailOv').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+/* ═══════════════════════════════════════════
+   FORM MODAL
+   ═══════════════════════════════════════════ */
+const CHARS_LIST = ['Piscina','Churrasqueira','Jardim','Portão Eletrônico','Câmeras de Segurança','Condomínio Fechado','Academia','Salão de Festas','Portaria 24h','Varanda Gourmet','Playground','Área de Lazer','Closet','Edícula','Quintal','Mobiliado','Próximo ao Metrô','Elevador','Segurança 24h','Ar-Condicionado'];
+
+function openForm(id){
+  const im = id ? props.find(p=>p.id===id) : null;
+  const chars = im ? (im.caracteristicas||[]) : [];
+  const chkHtml = CHARS_LIST.map(c=>`<label class="chi"><input type="checkbox" value="${esc(c)}" ${chars.includes(c)?'checked':''}> ${esc(c)}</label>`).join('');
+
+  document.getElementById('formBox').innerHTML = `
+    <div class="fttl">
+      ${im?'✏️ Editar Imóvel':'➕ Adicionar Novo Imóvel'}
+      <button onclick="closeForm()" style="background:none;font-size:22px;color:var(--muted)">✕</button>
+    </div>
+    <div class="fgrid">
+      <div class="sdiv">Informações Básicas</div>
+      <div class="frow">
+        <div class="fg"><label class="fl">Título *</label><input class="fc" id="fTitulo" value="${esc(im?.titulo||'')}" placeholder="Ex: Casa com Piscina no Centro"></div>
+        <div class="fg"><label class="fl">Tipo *</label><select class="fc" id="fTipoI"><option ${!im||im.tipo==='Casa'?'selected':''}>Casa</option><option ${im?.tipo==='Apartamento'?'selected':''}>Apartamento</option><option ${im?.tipo==='Terreno'?'selected':''}>Terreno</option><option ${im?.tipo==='Sala Comercial'?'selected':''}>Sala Comercial</option><option ${im?.tipo==='Loja'?'selected':''}>Loja</option></select></div>
+      </div>
+      <div class="frow">
+        <div class="fg"><label class="fl">Finalidade *</label><select class="fc" id="fFinalidade"><option value="Venda" ${!im||im.finalidade==='Venda'?'selected':''}>Venda</option><option value="Aluguel" ${im?.finalidade==='Aluguel'?'selected':''}>Aluguel</option></select></div>
+        <div class="fg"><label class="fl">Preço (R$) *</label><input class="fc" id="fPreco" type="number" min="0" value="${im?.preco||''}" placeholder="Ex: 350000"></div>
+      </div>
+      <div class="sdiv">Localização</div>
+      <div class="frow3">
+        <div class="fg"><label class="fl">Bairro</label><input class="fc" id="fBairro" value="${esc(im?.bairro||'')}" placeholder="Jardim América"></div>
+        <div class="fg"><label class="fl">Cidade</label><input class="fc" id="fCidade" value="${esc(im?.cidade||'')}" placeholder="São Paulo"></div>
+        <div class="fg"><label class="fl">Estado</label><input class="fc" id="fEstado" maxlength="2" value="${esc(im?.estado||'')}" placeholder="SP"></div>
+      </div>
+      <div class="sdiv">Características do Imóvel</div>
+      <div class="frow4">
+        <div class="fg"><label class="fl">Área (m²)</label><input class="fc" id="fArea" type="number" min="0" value="${im?.area||''}"></div>
+        <div class="fg"><label class="fl">Quartos</label><input class="fc" id="fQtos" type="number" min="0" value="${im?.quartos||''}"></div>
+        <div class="fg"><label class="fl">Suítes</label><input class="fc" id="fSuites" type="number" min="0" value="${im?.suites||''}"></div>
+        <div class="fg"><label class="fl">Banheiros</label><input class="fc" id="fBans" type="number" min="0" value="${im?.banheiros||''}"></div>
+      </div>
+      <div class="frow3">
+        <div class="fg"><label class="fl">Vagas</label><input class="fc" id="fVagas" type="number" min="0" value="${im?.vagas||''}"></div>
+        <div class="fg"><label class="fl">Condomínio (R$)</label><input class="fc" id="fCond" type="number" min="0" value="${im?.condominio||''}"></div>
+        <div class="fg"><label class="fl">IPTU anual (R$)</label><input class="fc" id="fIptu" type="number" min="0" value="${im?.iptu||''}"></div>
+      </div>
+      <div class="sdiv">Fotos</div>
+      <div class="fg"><label class="fl">URLs das Fotos (uma por linha)</label><textarea class="fc" id="fFotos" rows="3" placeholder="https://...">${(im?.fotos||[]).join('\n')}</textarea></div>
+      <div class="sdiv">Descrição</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:8px">
+        <span style="font-size:12px;color:var(--muted)">Descreva o imóvel ou use a IA para gerar automaticamente</span>
+        <button class="btn-ai" id="btnAi" onclick="gerarDescricaoIA()">
+          <span class="ai-icon">✨ Gerar com IA</span>
+          <span class="spin"></span>
+        </button>
+      </div>
+      <div class="fg"><textarea class="fc" id="fDesc" rows="5" placeholder="Descrição detalhada do imóvel...">${esc(im?.descricao||'')}</textarea></div>
+      <div class="sdiv">Comodidades</div>
+      <div class="chars-g" id="charsG">${chkHtml}</div>
+      <div class="frow">
+        <div class="fg" style="flex-direction:row;align-items:center;gap:10px;padding:12px;background:var(--light);border-radius:8px">
+          <input type="checkbox" id="fDest" ${im?.destaque?'checked':''} style="width:16px;height:16px;accent-color:var(--pri2)">
+          <label for="fDest" style="font-size:13.5px;font-weight:600;cursor:pointer">★ Marcar como Destaque</label>
+        </div>
+        <div class="fg" style="flex-direction:row;align-items:center;gap:10px;padding:12px;background:var(--light);border-radius:8px">
+          <input type="checkbox" id="fAtivo" ${!im||im.ativo?'checked':''} style="width:16px;height:16px;accent-color:var(--pri2)">
+          <label for="fAtivo" style="font-size:13.5px;font-weight:600;cursor:pointer">✅ Imóvel Ativo</label>
+        </div>
+      </div>
+    </div>
+    <div class="facts">
+      ${im?`<button class="btn-sv" style="background:var(--danger)" onclick="confirmDelete(${im.id})">🗑 Excluir</button>`:''}
+      <button class="btn-cn" onclick="closeForm()">Cancelar</button>
+      <button class="btn-sv" onclick="saveImovel(${im?im.id:'null'})">${im?'💾 Salvar Alterações':'➕ Cadastrar Imóvel'}</button>
+    </div>`;
+
+  document.getElementById('formOv').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeForm(){
+  document.getElementById('formOv').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+function saveImovel(id){
+  const titulo = document.getElementById('fTitulo').value.trim();
+  if(!titulo){ toast('Informe o título do imóvel','err'); return; }
+  const preco = parseFloat(document.getElementById('fPreco').value)||0;
+  if(!preco){ toast('Informe o preço','err'); return; }
+
+  const fotosRaw = document.getElementById('fFotos').value.trim();
+  const fotos = fotosRaw ? fotosRaw.split('\n').map(s=>s.trim()).filter(Boolean) : [];
+
+  const chars = Array.from(document.querySelectorAll('#charsG input:checked')).map(c=>c.value);
+
+  const data = {
+    titulo,
+    tipo: document.getElementById('fTipoI').value,
+    finalidade: document.getElementById('fFinalidade').value,
+    preco,
+    area: parseFloat(document.getElementById('fArea').value)||0,
+    quartos: parseInt(document.getElementById('fQtos').value)||0,
+    suites: parseInt(document.getElementById('fSuites').value)||0,
+    banheiros: parseInt(document.getElementById('fBans').value)||0,
+    vagas: parseInt(document.getElementById('fVagas').value)||0,
+    condominio: parseFloat(document.getElementById('fCond').value)||null,
+    iptu: parseFloat(document.getElementById('fIptu').value)||null,
+    bairro: document.getElementById('fBairro').value.trim(),
+    cidade: document.getElementById('fCidade').value.trim(),
+    estado: document.getElementById('fEstado').value.trim().toUpperCase(),
+    descricao: document.getElementById('fDesc').value.trim(),
+    fotos,
+    caracteristicas: chars,
+    destaque: document.getElementById('fDest').checked,
+    ativo: document.getElementById('fAtivo').checked,
+  };
+
+  if(id){
+    const idx = props.findIndex(p=>p.id===id);
+    if(idx>-1){ props[idx] = {...props[idx], ...data}; }
+  } else {
+    data.id = nextId();
+    data.codigo = nextCod();
+    data.dataCadastro = new Date().toISOString().slice(0,10);
+    props.push(data);
+  }
+
+  saveProps();
+  renderAll();
+  closeForm();
+  toast(id?'Imóvel atualizado com sucesso!':'Imóvel cadastrado com sucesso!','ok');
+}
+
+/* ═══════════════════════════════════════════
+   AI DESCRIÇÃO
+   ═══════════════════════════════════════════ */
+function gerarDescricaoIA(){
+  const btn = document.getElementById('btnAi');
+  btn.classList.add('ld');
+
+  const tipo = document.getElementById('fTipoI').value;
+  const finalidade = document.getElementById('fFinalidade').value;
+  const bairro = document.getElementById('fBairro').value.trim();
+  const cidade = document.getElementById('fCidade').value.trim();
+  const estado = document.getElementById('fEstado').value.trim();
+  const area = parseFloat(document.getElementById('fArea').value)||0;
+  const quartos = parseInt(document.getElementById('fQtos').value)||0;
+  const suites = parseInt(document.getElementById('fSuites').value)||0;
+  const banheiros = parseInt(document.getElementById('fBans').value)||0;
+  const vagas = parseInt(document.getElementById('fVagas').value)||0;
+  const condominio = parseFloat(document.getElementById('fCond').value)||null;
+  const iptu = parseFloat(document.getElementById('fIptu').value)||null;
+  const chars = Array.from(document.querySelectorAll('#charsG input:checked')).map(c=>c.value);
+
+  setTimeout(()=>{
+    const desc = buildDescription({tipo,finalidade,bairro,cidade,estado,area,quartos,suites,banheiros,vagas,condominio,iptu,caracteristicas:chars});
+    document.getElementById('fDesc').value = desc;
+    btn.classList.remove('ld');
+    toast('Descrição gerada pela IA! ✨','ok');
+  }, 900);
+}
+
+function buildDescription(d){
+  const {tipo,finalidade,bairro,cidade,estado,area,quartos,suites,banheiros,vagas,condominio,iptu,caracteristicas} = d;
+  const fin = finalidade==='Venda' ? 'à venda' : 'para alugar';
+  const loc = [bairro,cidade,estado?`${estado}`:''].filter(Boolean).join(', ');
+  const tipoBx = tipo.toLowerCase();
+
+  const aberturas = [
+    `Excelente ${tipoBx} ${fin}${loc?', localizado em '+loc:''}. `,
+    `Oportunidade única! ${tipo} ${fin}${bairro?' no bairro '+bairro:''}${cidade?' em '+cidade:''}.  `,
+    `Conheça este incrível ${tipoBx} ${fin}${loc?' em '+loc:''}, com excelente localização e infraestrutura completa. `,
+  ];
+
+  let txt = aberturas[Math.floor(Math.random()*aberturas.length)];
+
+  const specs = [];
+  if(area) specs.push(`${area}m² de área`);
+  if(quartos) specs.push(`${quartos} quarto${quartos>1?'s':''}${suites?' (sendo '+suites+' suíte'+(suites>1?'s':'')+')':''}`);
+  if(banheiros) specs.push(`${banheiros} banheiro${banheiros>1?'s':''}`);
+  if(vagas) specs.push(`${vagas} vaga${vagas>1?'s':''} de garagem`);
+
+  if(specs.length){
+    if(tipo==='Terreno') txt += `\n\nO terreno conta com ${specs.join(', ')}, ideal para construção residencial ou comercial.`;
+    else txt += `\n\nO imóvel oferece ${specs.join(', ')}, proporcionando todo o conforto e praticidade que sua família merece.`;
+  }
+
+  if(caracteristicas&&caracteristicas.length){
+    txt += `\n\nEntre os diferenciais, destacam-se: ${caracteristicas.slice(0,6).join(', ')}.`;
+  }
+
+  if(loc) txt += `\n\nLocalizado em ${loc}, o imóvel fica próximo a escolas, comércio, transporte público e serviços essenciais, garantindo praticidade no seu dia a dia.`;
+
+  const extras = [];
+  if(condominio) extras.push(`condomínio de R$ ${condominio.toLocaleString('pt-BR')}/mês`);
+  if(iptu) extras.push(`IPTU de R$ ${iptu.toLocaleString('pt-BR')}/ano`);
+  if(extras.length) txt += ` O imóvel possui ${extras.join(' e ')}.`;
+
+  const fechamentos = [
+    `\n\nNão perca esta oportunidade! Entre em contato pelo WhatsApp e agende sua visita sem compromisso.`,
+    `\n\nImóvel em excelente estado de conservação. Agende sua visita agora!`,
+    `\n\nOportunidade imperdível! Entre em contato e realize o sonho do imóvel ideal.`,
+    `\n\nCondições especiais de pagamento disponíveis. Consulte-nos pelo WhatsApp!`,
+  ];
+  txt += fechamentos[Math.floor(Math.random()*fechamentos.length)];
+  return txt;
+}
+
+/* ═══════════════════════════════════════════
+   WHATSAPP
+   ═══════════════════════════════════════════ */
+function contactWpp(id){
+  let msg;
+  if(id){
+    const im = props.find(p=>p.id===id);
+    if(im){
+      msg = `Olá! Vi o imóvel *${im.codigo} – ${im.titulo}* (${fmtPricePlain(im.preco,im.finalidade)}) no site ${CFG.nome} e gostaria de mais informações.\n\nCódigo: ${im.codigo}\nTipo: ${im.tipo}\nFinalidade: ${im.finalidade}\nLocalização: ${[im.bairro,im.cidade].filter(Boolean).join(', ')}\nPreço: ${fmtPricePlain(im.preco,im.finalidade)}\n\nAguardo retorno. Obrigado(a)!`;
+    }
+  }
+  if(!msg) msg = `Olá! Acessei o site da ${CFG.nome} e gostaria de informações sobre os imóveis disponíveis. Pode me ajudar?`;
+  window.open(`https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+function shareWpp(id){
+  const im = props.find(p=>p.id===id);
+  if(!im) return;
+  const msg = `🏠 *${im.titulo}*\n📍 ${[im.bairro,im.cidade].filter(Boolean).join(', ')}\n💰 ${fmtPricePlain(im.preco,im.finalidade)}\n🏷 ${im.tipo} · ${im.finalidade}\n\nVeja mais em: ${CFG.siteUrl}\n\n_${CFG.nome}_`;
+  window.open(`https://wa.me/?text=${encodeURIComponent(msg)}`,'_blank');
+}
+
+/* ═══════════════════════════════════════════
+   DELETE
+   ═══════════════════════════════════════════ */
+function confirmDelete(id){
+  deleteId = id;
+  document.getElementById('confirmOv').classList.add('open');
+}
+function closeConfirm(){
+  document.getElementById('confirmOv').classList.remove('open');
+  deleteId = null;
+}
+document.getElementById('btnDel').onclick = function(){
+  if(!deleteId) return;
+  props = props.filter(p=>p.id!==deleteId);
+  saveProps(); renderAll(); closeConfirm(); closeForm(); closeDetail();
+  toast('Imóvel excluído','ok');
+};
+
+/* ═══════════════════════════════════════════
+   HERO SEARCH
+   ═══════════════════════════════════════════ */
+function setTab(btn, fin){
+  document.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  heroFinalidade = fin;
+}
+
+function heroSearch(){
+  document.getElementById('fTipo').value = document.getElementById('hTipo').value;
+  document.getElementById('fFin').value = heroFinalidade;
+  document.getElementById('fSrch').value = document.getElementById('hLocal').value;
+  document.getElementById('fQto').value = document.getElementById('hQto').value;
+  applyFilters();
+  document.getElementById('imoveis').scrollIntoView({behavior:'smooth'});
+}
+
+/* ═══════════════════════════════════════════
+   TOAST
+   ═══════════════════════════════════════════ */
+function toast(msg, type=''){
+  const t = document.createElement('div');
+  t.className = 'toast ' + type;
+  t.textContent = msg;
+  document.getElementById('tct').appendChild(t);
+  setTimeout(()=>t.remove(), 3200);
+}
+
+/* ═══════════════════════════════════════════
+   MODAL HELPERS
+   ═══════════════════════════════════════════ */
+function ovClick(e, id){
+  if(e.target===document.getElementById(id)){
+    if(id==='detailOv') closeDetail();
+    else if(id==='formOv') closeForm();
+  }
+}
+
+/* ═══════════════════════════════════════════
+   MOBILE MENU
+   ═══════════════════════════════════════════ */
+function toggleMenu(){
+  document.getElementById('mobMenu').classList.toggle('open');
+}
+function closeMenu(){
+  document.getElementById('mobMenu').classList.remove('open');
+}
+
+/* ═══════════════════════════════════════════
+   KEYBOARD
+   ═══════════════════════════════════════════ */
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape'){closeDetail();closeForm();closeConfirm();}
+});
+
+/* ═══════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════ */
+loadProps();
+renderAll();
+</script>
+</body>
+</html>
