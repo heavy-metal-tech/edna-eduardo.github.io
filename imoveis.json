@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1, "codigo": "EE001",
+    "titulo": "Casa com Piscina no Jardim das Flores",
+    "tipo": "Casa", "finalidade": "Venda",
+    "preco": 750000, "area": 280, "quartos": 4, "suites": 2, "banheiros": 3, "vagas": 3,
+    "bairro": "Jardim das Flores", "cidade": "São Paulo", "estado": "SP",
+    "fotos": ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800&auto=format&q=80","https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&auto=format&q=80","https://images.unsplash.com/photo-1484154218962-a197022b5858?w=800&auto=format&q=80"],
+    "caracteristicas": ["Piscina","Churrasqueira","Jardim","Portão Eletrônico","Câmeras de Segurança","Closet"],
+    "descricao": "Excelente casa de alto padrão localizada no bairro Jardim das Flores, São Paulo/SP.\n\nO imóvel oferece 280m² de área, 4 quartos (sendo 2 suítes), 3 banheiros e 3 vagas de garagem, proporcionando muito conforto e praticidade para toda a família.\n\nCom infraestrutura de qualidade, o imóvel conta com: piscina, churrasqueira, jardim, portão eletrônico e câmeras de segurança.\n\nSituado em localização privilegiada, próximo a escolas, comércio, transporte público e demais serviços essenciais.\n\nNão perca esta oportunidade! Entre em contato e agende sua visita sem compromisso!",
+    "destaque": true, "condominio": null, "iptu": 620, "ativo": true, "dataCadastro": "2024-10-01"
+  },
+  {
+    "id": 2, "codigo": "EE002",
+    "titulo": "Apartamento Moderno com Vista Panorâmica",
+    "tipo": "Apartamento", "finalidade": "Venda",
+    "preco": 485000, "area": 120, "quartos": 3, "suites": 1, "banheiros": 2, "vagas": 2,
+    "bairro": "Centro", "cidade": "São Paulo", "estado": "SP",
+    "fotos": ["https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?w=800&auto=format&q=80","https://images.unsplash.com/photo-1554995207-c18c203602cb?w=800&auto=format&q=80"],
+    "caracteristicas": ["Varanda Gourmet","Academia","Salão de Festas","Portaria 24h","Elevador"],
+    "descricao": "Magnífico apartamento à venda no centro de São Paulo/SP.\n\nO imóvel oferece 120m² de área, 3 quartos (sendo 1 suíte), 2 banheiros e 2 vagas de garagem.\n\nCom infraestrutura de qualidade, o condomínio conta com: varanda gourmet, academia, salão de festas e portaria 24h.\n\nLocalização central, próximo a tudo. Imóvel em excelente estado de conservação. Agende sua visita!",
+    "destaque": true, "condominio": 800, "iptu": 340, "ativo": true, "dataCadastro": "2024-10-05"
+  },
+  {
+    "id": 3, "codigo": "EE003",
+    "titulo": "Casa em Condomínio Fechado – Pronta para Morar",
+    "tipo": "Casa", "finalidade": "Aluguel",
+    "preco": 3800, "area": 180, "quartos": 3, "suites": 1, "banheiros": 2, "vagas": 2,
+    "bairro": "Alphaville", "cidade": "Barueri", "estado": "SP",
+    "fotos": ["https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&auto=format&q=80","https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=800&auto=format&q=80"],
+    "caracteristicas": ["Condomínio Fechado","Playground","Área de Lazer","Segurança 24h"],
+    "descricao": "Ótima casa para alugar em condomínio fechado em Alphaville, Barueri/SP.\n\nO imóvel oferece 180m² de área, 3 quartos (sendo 1 suíte), 2 banheiros e 2 vagas de garagem.\n\nCondomínio com área de lazer completa: playground, piscina e segurança 24 horas.\n\nPerfeita para famílias que buscam segurança e qualidade de vida. Entre em contato para agendar sua visita!",
+    "destaque": true, "condominio": 1200, "iptu": null, "ativo": true, "dataCadastro": "2024-10-10"
+  },
+  {
+    "id": 4, "codigo": "EE004",
+    "titulo": "Apartamento Aconchegante 2 Quartos",
+    "tipo": "Apartamento", "finalidade": "Aluguel",
+    "preco": 1850, "area": 75, "quartos": 2, "suites": 0, "banheiros": 1, "vagas": 1,
+    "bairro": "Moema", "cidade": "São Paulo", "estado": "SP",
+    "fotos": ["https://images.unsplash.com/photo-1536376072261-38c75010e6c9?w=800&auto=format&q=80"],
+    "caracteristicas": ["Mobiliado","Próximo ao Metrô","Área de Serviço"],
+    "descricao": "Apartamento aconchegante para alugar no bairro Moema, São Paulo/SP.\n\nO imóvel oferece 75m² de área, 2 quartos, 1 banheiro e 1 vaga de garagem.\n\nImóvel mobiliado e pronto para morar! Próximo ao metrô, facilitando seu deslocamento diário.\n\nExcelente custo-benefício. Entre em contato agora!",
+    "destaque": false, "condominio": 350, "iptu": null, "ativo": true, "dataCadastro": "2024-10-12"
+  },
+  {
+    "id": 5, "codigo": "EE005",
+    "titulo": "Terreno Residencial em Localização Privilegiada",
+    "tipo": "Terreno", "finalidade": "Venda",
+    "preco": 185000, "area": 300, "quartos": 0, "suites": 0, "banheiros": 0, "vagas": 0,
+    "bairro": "Jardim América", "cidade": "São Paulo", "estado": "SP",
+    "fotos": ["https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=800&auto=format&q=80"],
+    "caracteristicas": ["Escriturado","Plano","Infraestrutura Completa","Próximo ao Comércio"],
+    "descricao": "Terreno residencial à venda no bairro Jardim América, São Paulo/SP.\n\nO terreno conta com 300m² de área, ideal para construção residencial. Terreno plano, escriturado e com toda infraestrutura de rua: água, luz e esgoto.\n\nLocalização privilegiada, próximo a escolas, comércio e transporte público. Excelente oportunidade de investimento!\n\nDocumentação em dia. Entre em contato para mais informações!",
+    "destaque": false, "condominio": null, "iptu": 180, "ativo": true, "dataCadastro": "2024-10-15"
+  },
+  {
+    "id": 6, "codigo": "EE006",
+    "titulo": "Casa com Edícula – Excelente para Família",
+    "tipo": "Casa", "finalidade": "Venda",
+    "preco": 420000, "area": 220, "quartos": 3, "suites": 0, "banheiros": 2, "vagas": 2,
+    "bairro": "Vila Maria", "cidade": "São Paulo", "estado": "SP",
+    "fotos": ["https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=800&auto=format&q=80"],
+    "caracteristicas": ["Edícula","Quintal","Churrasqueira","Portão Automático"],
+    "descricao": "Ótima casa à venda no bairro Vila Maria, São Paulo/SP.\n\nO imóvel oferece 220m² de área, 3 quartos, 2 banheiros e 2 vagas de garagem, além de edícula completa no fundo.\n\nCom churrasqueira, quintal espaçoso e portão automático. Imóvel em excelente estado, pronto para morar.\n\nNão perca esta oportunidade! Agende sua visita pelo WhatsApp!",
+    "destaque": false, "condominio": null, "iptu": 390, "ativo": true, "dataCadastro": "2024-10-18"
+  }
+]
