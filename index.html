@@ -588,9 +588,13 @@ footer{background:#162d4a;border-top:3px solid var(--acc)}
    CONFIGURAÇÃO — edite aqui
    ═══════════════════════════════════════════ */
 const CFG = {
-  whatsapp: '5511999999999',   // ← coloque o número com código do país (55) + DDD
+  whatsapp: '5511999999999',   // ← TROCAR pelo número real (55 + DDD + número)
   nome: 'E&E Imóveis',
-  siteUrl: 'https://heavy-metal-tech.github.io/edna-eduardo.github.io'
+  siteUrl: 'https://heavy-metal-tech.github.io/edna-eduardo.github.io',
+  /* TROCAR pela URL real da API no Render após o deploy */
+  apiUrl: (location.hostname === 'localhost' || location.hostname === '127.0.0.1')
+    ? 'http://localhost:3001'
+    : 'https://api-ee-imoveis.onrender.com'
 };
 
 /* ═══════════════════════════════════════════
@@ -675,16 +679,20 @@ let heroFinalidade = '';
 let deleteId = null;
 
 /* ═══════════════════════════════════════════
-   LOCALSTORAGE
+   DADOS — busca da API (Render + Neon)
    ═══════════════════════════════════════════ */
-function loadProps(){
+async function loadProps(){
   try{
-    const raw = localStorage.getItem('ee_imoveis');
-    if(raw){ props = JSON.parse(raw); }
-    else { props = JSON.parse(JSON.stringify(DEFAULT_PROPS)); saveProps(); }
-  } catch(e){ props = JSON.parse(JSON.stringify(DEFAULT_PROPS)); }
+    const r = await fetch(CFG.apiUrl + '/imoveis');
+    if(!r.ok) throw new Error('API indisponível');
+    props = await r.json();
+  } catch(e){
+    console.warn('Usando dados locais (API offline):', e.message);
+    props = JSON.parse(JSON.stringify(DEFAULT_PROPS));
+  }
 }
-function saveProps(){ localStorage.setItem('ee_imoveis', JSON.stringify(props)); }
+/* saveProps não é mais necessário — API gerencia o estado */
+function saveProps(){ /* noop — gerenciado pelo backend */ }
 
 /* ═══════════════════════════════════════════
    FORMATAÇÃO
@@ -1105,6 +1113,11 @@ function contactWpp(id){
     }
   }
   if(!msg) msg = `Olá! Acessei o site da ${CFG.nome} e gostaria de informações sobre os imóveis disponíveis. Pode me ajudar?`;
+  /* Salva lead em background quando contato é para imóvel específico */
+  if(id){
+    const im2 = props.find(p=>p.id===id);
+    if(im2) fetch(CFG.apiUrl+'/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({nome:'Visitante',telefone:'via WhatsApp',mensagem:`Interesse: ${im2.codigo} – ${im2.titulo}`,imovelId:im2.id})}).catch(()=>{});
+  }
   window.open(`https://wa.me/${CFG.whatsapp}?text=${encodeURIComponent(msg)}`,'_blank');
 }
 
@@ -1192,8 +1205,10 @@ document.addEventListener('keydown',e=>{
 /* ═══════════════════════════════════════════
    INIT
    ═══════════════════════════════════════════ */
-loadProps();
-renderAll();
+(async () => {
+  await loadProps();
+  renderAll();
+})();
 
 /* Copyright year */
 document.getElementById('copyright').innerHTML = '© ' + new Date().getFullYear() + ' E&amp;E Imóveis. Todos os direitos reservados.';
@@ -1214,6 +1229,11 @@ function sendLead(){
     if(!el.value.trim()){ el.classList.add('err-field'); ok=false; }
   });
   if(!ok){ toast('Preencha nome e telefone','err'); return; }
+  /* Salva lead na API em background */
+  fetch(CFG.apiUrl + '/leads', {
+    method:'POST', headers:{'Content-Type':'application/json'},
+    body: JSON.stringify({nome, telefone:tel, mensagem:msg||null})
+  }).catch(()=>{});
   const texto = `Olá! Sou ${nome}, meu telefone é ${tel}.${msg?' '+msg:' Gostaria de informações sobre imóveis disponíveis.'}`;
   window.open('https://wa.me/'+CFG.whatsapp+'?text='+encodeURIComponent(texto),'_blank');
 }

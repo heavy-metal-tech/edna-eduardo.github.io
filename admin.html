@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin – E&E Imóveis</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231e3a5f'/%3E%3Cpath d='M50 18L18 48h10v28h18V58h8v18h18V48h10z' fill='%23f59e0b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--pri:#1e3a5f;--pri2:#2563eb;--acc:#f59e0b;--grn:#16a34a;--wpp:#25d366;--danger:#dc2626;--bg:#f1f5f9;--card:#fff;--border:#e2e8f0;--txt:#1e293b;--muted:#64748b;--r:10px;--sh:0 2px 12px rgba(0,0,0,.07);--tr:all .18s ease}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh}
+a{text-decoration:none;color:inherit}button{cursor:pointer;font-family:inherit;border:none}
+input,select,textarea{font-family:inherit;outline:none}
+
+/* Login */
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:linear-gradient(135deg,#0f2847,#1a4a7a)}
+.login-box{background:#fff;border-radius:16px;padding:36px;width:100%;max-width:380px;box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.login-logo{text-align:center;margin-bottom:24px}
+.login-logo-ic{width:54px;height:54px;background:var(--acc);border-radius:14px;display:inline-flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:var(--pri);margin-bottom:10px}
+.login-logo h1{font-size:20px;font-weight:800;color:var(--pri)}
+.login-logo p{font-size:12px;color:var(--muted);margin-top:2px}
+.lg{display:flex;flex-direction:column;gap:4px;margin-bottom:14px}
+.ll{font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+.lc{padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;color:var(--txt);transition:var(--tr);width:100%}
+.lc:focus{border-color:var(--pri2);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.btn-login{width:100%;padding:12px;background:var(--pri);color:#fff;border-radius:8px;font-size:14px;font-weight:700;transition:var(--tr);border:none;margin-top:4px}
+.btn-login:hover{background:var(--pri2)}
+.login-err{font-size:12.5px;color:var(--danger);text-align:center;margin-top:10px;display:none}
+
+/* Layout admin */
+.adm{display:none;min-height:100vh}
+.adm-header{background:var(--pri);padding:0 24px;height:58px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:50;box-shadow:0 2px 12px rgba(0,0,0,.2)}
+.adm-logo{color:#fff;font-size:16px;font-weight:800;display:flex;align-items:center;gap:10px}
+.adm-logo-ic{width:32px;height:32px;background:var(--acc);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:var(--pri)}
+.adm-nav{display:flex;gap:4px}
+.adm-nav button{padding:7px 14px;border-radius:7px;font-size:12.5px;font-weight:600;background:none;color:rgba(255,255,255,.7);transition:var(--tr);border:none}
+.adm-nav button.active,.adm-nav button:hover{background:rgba(255,255,255,.12);color:#fff}
+.btn-logout{padding:7px 14px;border-radius:7px;font-size:12.5px;font-weight:600;background:rgba(220,38,38,.2);color:#fca5a5;border:none;transition:var(--tr)}
+.btn-logout:hover{background:rgba(220,38,38,.4);color:#fff}
+.adm-body{padding:24px;max-width:1200px;margin:0 auto}
+
+/* Cards de stats */
+.stats-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-bottom:24px}
+.stat-card{background:var(--card);border-radius:var(--r);padding:16px 18px;box-shadow:var(--sh);border:1px solid var(--border)}
+.stat-card .n{font-size:28px;font-weight:900;color:var(--pri)}
+.stat-card .l{font-size:11.5px;color:var(--muted);margin-top:2px}
+
+/* Tabelas */
+.tbl-wrap{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);border:1px solid var(--border);overflow:hidden}
+.tbl-head{padding:16px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border);flex-wrap:wrap;gap:10px}
+.tbl-head h2{font-size:15px;font-weight:700}
+.btn-new{display:flex;align-items:center;gap:6px;padding:9px 16px;background:var(--pri);color:#fff;border-radius:8px;font-size:13px;font-weight:600;transition:var(--tr);border:none}
+.btn-new:hover{background:var(--pri2)}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:11px 16px;font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--muted);border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:12px 16px;font-size:13px;border-bottom:1px solid #f1f5f9;vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#f8fafc}
+.badge{display:inline-block;padding:3px 9px;border-radius:20px;font-size:10.5px;font-weight:700}
+.badge.venda{background:#dbeafe;color:#1d4ed8}
+.badge.aluguel{background:#dcfce7;color:#15803d}
+.badge.dest{background:#fef3c7;color:#b45309}
+.tbl-acts{display:flex;gap:6px}
+.btn-ed{padding:5px 11px;border-radius:6px;background:#eff6ff;color:var(--pri2);font-size:12px;font-weight:600;border:none;transition:var(--tr)}
+.btn-ed:hover{background:var(--pri2);color:#fff}
+.btn-del{padding:5px 11px;border-radius:6px;background:#fef2f2;color:var(--danger);font-size:12px;font-weight:600;border:none;transition:var(--tr)}
+.btn-del:hover{background:var(--danger);color:#fff}
+
+/* Modal */
+.modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:200;padding:16px;overflow-y:auto}
+.modal-ov.open{display:flex;align-items:flex-start;justify-content:center}
+.modal-box{background:#fff;border-radius:14px;width:100%;max-width:700px;padding:26px;margin:auto;animation:sli .22s ease}
+@keyframes sli{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.modal-ttl{font-size:17px;font-weight:800;color:var(--pri);margin-bottom:20px;padding-bottom:14px;border-bottom:2px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.btn-cls{background:none;font-size:22px;color:var(--muted);border:none;line-height:1;cursor:pointer}
+.fg{display:flex;flex-direction:column;gap:4px;margin-bottom:12px}
+.fl{font-size:10.5px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
+.fc{padding:10px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:13.5px;color:var(--txt);background:#fff;transition:var(--tr);width:100%}
+.fc:focus{border-color:var(--pri2);box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+textarea.fc{resize:vertical;min-height:90px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.frow3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px}
+.sdiv{font-size:10.5px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--pri);padding:5px 11px;background:rgba(37,99,235,.06);border-left:3px solid var(--pri);border-radius:0 6px 6px 0;margin:8px 0 4px}
+.chars-g{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-bottom:12px}
+.chi{display:flex;align-items:center;gap:6px;font-size:12.5px;cursor:pointer;padding:5px 7px;border-radius:6px;transition:var(--tr)}
+.chi:hover{background:#f1f5f9}
+.chi input{accent-color:var(--pri2);width:14px;height:14px}
+.modal-acts{display:flex;gap:10px;margin-top:16px;justify-content:flex-end;flex-wrap:wrap}
+.btn-sv{padding:10px 22px;background:var(--pri);color:#fff;border-radius:8px;font-size:13.5px;font-weight:700;border:none;transition:var(--tr)}
+.btn-sv:hover{background:var(--pri2)}
+.btn-cn{padding:10px 18px;background:#f1f5f9;color:var(--txt);border-radius:8px;font-size:13.5px;font-weight:600;border:1.5px solid var(--border);transition:var(--tr)}
+.btn-cn:hover{border-color:var(--danger);color:var(--danger)}
+
+/* Toast */
+.tct{position:fixed;bottom:20px;left:20px;z-index:600;display:flex;flex-direction:column;gap:7px}
+.toast{padding:11px 18px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:0 4px 20px rgba(0,0,0,.2);animation:sli .22s ease;max-width:300px;color:#fff}
+.toast.ok{background:var(--grn)}.toast.err{background:var(--danger)}.toast.info{background:var(--pri)}
+
+/* Tabs */
+.tab-panel{display:none}.tab-panel.active{display:block}
+
+/* Leads table responsivo */
+.lead-msg{max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Search */
+.tbl-search{padding:9px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:13px;min-width:220px}
+.tbl-search:focus{border-color:var(--pri2);outline:none}
+
+@media(max-width:640px){
+  .frow,.frow3{grid-template-columns:1fr}
+  .adm-nav{display:none}
+  .chars-g{grid-template-columns:1fr 1fr}
+  .stats-row{grid-template-columns:1fr 1fr}
+  th:nth-child(n+4),td:nth-child(n+4){display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Login -->
+<div class="login-wrap" id="loginWrap">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="login-logo-ic">E&amp;E</div>
+      <h1>E&amp;E Imóveis</h1>
+      <p>Painel Administrativo</p>
+    </div>
+    <div class="lg"><label class="ll">Usuário</label><input class="lc" id="lUser" type="text" placeholder="admin"></div>
+    <div class="lg"><label class="ll">Senha</label><input class="lc" id="lPass" type="password" placeholder="••••••••"></div>
+    <button class="btn-login" onclick="doLogin()">Entrar</button>
+    <div class="login-err" id="loginErr">Usuário ou senha incorretos</div>
+  </div>
+</div>
+
+<!-- Admin -->
+<div class="adm" id="admWrap">
+  <header class="adm-header">
+    <div class="adm-logo"><div class="adm-logo-ic">E&amp;E</div>Admin</div>
+    <div class="adm-nav">
+      <button class="active" onclick="showTab('imoveis',this)">Imóveis</button>
+      <button onclick="showTab('leads',this)">Leads</button>
+    </div>
+    <button class="btn-logout" onclick="doLogout()">Sair</button>
+  </header>
+
+  <div class="adm-body">
+    <!-- Stats -->
+    <div class="stats-row" id="statsRow"></div>
+
+    <!-- Tab: Imóveis -->
+    <div class="tab-panel active" id="tab-imoveis">
+      <div class="tbl-wrap">
+        <div class="tbl-head">
+          <h2>Imóveis</h2>
+          <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap">
+            <input class="tbl-search" id="srchIm" placeholder="Buscar..." oninput="renderImoveis()">
+            <button class="btn-new" onclick="openForm(null)">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 5v14M5 12h14"/></svg>
+              Novo Imóvel
+            </button>
+          </div>
+        </div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr>
+              <th>Código</th><th>Título</th><th>Tipo</th><th>Finalidade</th><th>Preço</th><th>Destaque</th><th>Ações</th>
+            </tr></thead>
+            <tbody id="tbIm"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Leads -->
+    <div class="tab-panel" id="tab-leads">
+      <div class="tbl-wrap">
+        <div class="tbl-head">
+          <h2>Leads recebidos</h2>
+          <input class="tbl-search" id="srchLead" placeholder="Buscar..." oninput="renderLeads()">
+        </div>
+        <div style="overflow-x:auto">
+          <table>
+            <thead><tr>
+              <th>Data</th><th>Nome</th><th>Telefone</th><th>Mensagem</th><th>Imóvel</th>
+            </tr></thead>
+            <tbody id="tbLead"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Form Modal -->
+<div class="modal-ov" id="formOv">
+  <div class="modal-box" id="formBox"></div>
+</div>
+
+<!-- Toast -->
+<div class="tct" id="tct"></div>
+
+<script>
+/* ── Config ── */
+const API = (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1')
+  ? 'http://localhost:3001'
+  : 'https://api-ee-imoveis.onrender.com'; /* TROCAR pela URL real da sua API no Render */
+
+const CHARS_LIST = ['Piscina','Churrasqueira','Jardim','Portão Eletrônico','Câmeras de Segurança','Condomínio Fechado','Academia','Salão de Festas','Portaria 24h','Varanda Gourmet','Playground','Área de Lazer','Closet','Edícula','Quintal','Mobiliado','Próximo ao Metrô','Elevador','Segurança 24h','Ar-Condicionado'];
+
+let token = localStorage.getItem('adm_token') || '';
+let imoveis = [], leads = [], editId = null;
+
+/* ── Auth ── */
+async function doLogin() {
+  const usuario = document.getElementById('lUser').value.trim();
+  const senha   = document.getElementById('lPass').value;
+  document.getElementById('loginErr').style.display = 'none';
+  try {
+    const r = await fetch(`${API}/auth/login`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({usuario,senha})
+    });
+    if (!r.ok) throw new Error();
+    const { token: tk } = await r.json();
+    token = tk;
+    localStorage.setItem('adm_token', tk);
+    showAdmin();
+  } catch {
+    document.getElementById('loginErr').style.display = 'block';
+  }
+}
+
+document.getElementById('lPass').addEventListener('keydown', e => { if(e.key==='Enter') doLogin(); });
+
+function doLogout() {
+  token = '';
+  localStorage.removeItem('adm_token');
+  document.getElementById('admWrap').style.display = 'none';
+  document.getElementById('loginWrap').style.display = 'flex';
+}
+
+async function showAdmin() {
+  document.getElementById('loginWrap').style.display = 'none';
+  document.getElementById('admWrap').style.display = 'block';
+  await Promise.all([loadImoveis(), loadLeads()]);
+  renderStats();
+}
+
+/* Auto-login se token existir */
+if (token) {
+  showAdmin().catch(() => {
+    token = '';
+    localStorage.removeItem('adm_token');
+  });
+}
+
+/* ── Fetch helpers ── */
+async function api(path, opts={}) {
+  const r = await fetch(`${API}${path}`, {
+    ...opts,
+    headers: { 'Content-Type':'application/json', 'Authorization':`Bearer ${token}`, ...(opts.headers||{}) }
+  });
+  if (!r.ok) throw new Error(await r.text());
+  return r.json();
+}
+
+async function loadImoveis() {
+  try { imoveis = await api('/imoveis'); renderImoveis(); }
+  catch { toast('Erro ao carregar imóveis','err'); }
+}
+async function loadLeads() {
+  try { leads = await api('/leads'); renderLeads(); }
+  catch { console.warn('Erro ao carregar leads'); }
+}
+
+/* ── Stats ── */
+function renderStats() {
+  const total = imoveis.length;
+  const venda = imoveis.filter(i=>i.finalidade==='Venda').length;
+  const alug  = imoveis.filter(i=>i.finalidade==='Aluguel').length;
+  const dest  = imoveis.filter(i=>i.destaque).length;
+  document.getElementById('statsRow').innerHTML = `
+    <div class="stat-card"><div class="n">${total}</div><div class="l">Imóveis ativos</div></div>
+    <div class="stat-card"><div class="n">${venda}</div><div class="l">À venda</div></div>
+    <div class="stat-card"><div class="n">${alug}</div><div class="l">Para alugar</div></div>
+    <div class="stat-card"><div class="n">${dest}</div><div class="l">Em destaque</div></div>
+    <div class="stat-card"><div class="n">${leads.length}</div><div class="l">Leads recebidos</div></div>
+  `;
+}
+
+/* ── Tabs ── */
+function showTab(name, btn) {
+  document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.adm-nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  btn.classList.add('active');
+}
+
+/* ── Tabela Imóveis ── */
+function renderImoveis() {
+  const q = (document.getElementById('srchIm').value||'').toLowerCase();
+  const list = imoveis.filter(i=>!q || [i.titulo,i.bairro,i.cidade,i.codigo].join(' ').toLowerCase().includes(q));
+  document.getElementById('tbIm').innerHTML = list.map(im=>`
+    <tr>
+      <td><code style="font-size:11px;background:#f1f5f9;padding:2px 6px;border-radius:4px">${esc(im.codigo)}</code></td>
+      <td style="max-width:220px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(im.titulo)}</td>
+      <td>${esc(im.tipo)}</td>
+      <td><span class="badge ${im.finalidade==='Venda'?'venda':'aluguel'}">${esc(im.finalidade)}</span></td>
+      <td style="white-space:nowrap">R$ ${parseFloat(im.preco).toLocaleString('pt-BR')}</td>
+      <td>${im.destaque?'<span class="badge dest">★ Destaque</span>':''}</td>
+      <td><div class="tbl-acts">
+        <button class="btn-ed" onclick="openForm(${im.id})">Editar</button>
+        <button class="btn-del" onclick="delImovel(${im.id})">Excluir</button>
+      </div></td>
+    </tr>`).join('') || '<tr><td colspan="7" style="text-align:center;color:#94a3b8;padding:32px">Nenhum imóvel</td></tr>';
+}
+
+/* ── Tabela Leads ── */
+function renderLeads() {
+  const q = (document.getElementById('srchLead').value||'').toLowerCase();
+  const list = leads.filter(l=>!q || [l.nome,l.telefone,l.mensagem||''].join(' ').toLowerCase().includes(q));
+  document.getElementById('tbLead').innerHTML = list.map(l=>`
+    <tr>
+      <td style="white-space:nowrap;font-size:12px;color:#64748b">${new Date(l.created_at).toLocaleString('pt-BR')}</td>
+      <td>${esc(l.nome)}</td>
+      <td><a href="https://wa.me/55${esc(l.telefone.replace(/\D/g,''))}" target="_blank" style="color:#16a34a;font-weight:600">${esc(l.telefone)}</a></td>
+      <td class="lead-msg">${esc(l.mensagem||'—')}</td>
+      <td style="font-size:12px;color:#64748b">${l.imovel_codigo?esc(l.imovel_codigo+' '+l.imovel_titulo):'—'}</td>
+    </tr>`).join('') || '<tr><td colspan="5" style="text-align:center;color:#94a3b8;padding:32px">Nenhum lead</td></tr>';
+}
+
+/* ── Form Imóvel ── */
+function openForm(id) {
+  editId = id;
+  const im = id ? imoveis.find(i=>i.id===id) : null;
+  const chars = im ? (im.caracteristicas||[]) : [];
+  const chkHtml = CHARS_LIST.map(c=>`<label class="chi"><input type="checkbox" value="${esc(c)}" ${chars.includes(c)?'checked':''}> ${esc(c)}</label>`).join('');
+
+  document.getElementById('formBox').innerHTML = `
+    <div class="modal-ttl">
+      ${im?'Editar Imóvel':'Novo Imóvel'}
+      <button class="btn-cls" onclick="closeForm()">✕</button>
+    </div>
+    <div class="sdiv">Informações básicas</div>
+    <div class="frow">
+      <div class="fg"><label class="fl">Título *</label><input class="fc" id="fTit" value="${esc(im?.titulo||'')}"></div>
+      <div class="fg"><label class="fl">Tipo *</label><select class="fc" id="fTipo">
+        ${['Casa','Apartamento','Terreno','Sala Comercial','Loja'].map(t=>`<option ${im?.tipo===t?'selected':''}>${t}</option>`).join('')}
+      </select></div>
+    </div>
+    <div class="frow">
+      <div class="fg"><label class="fl">Finalidade *</label><select class="fc" id="fFin">
+        <option value="Venda" ${!im||im.finalidade==='Venda'?'selected':''}>Venda</option>
+        <option value="Aluguel" ${im?.finalidade==='Aluguel'?'selected':''}>Aluguel</option>
+      </select></div>
+      <div class="fg"><label class="fl">Preço (R$) *</label><input class="fc" id="fPrc" type="number" value="${im?.preco||''}"></div>
+    </div>
+    <div class="sdiv">Localização</div>
+    <div class="frow3">
+      <div class="fg"><label class="fl">Bairro</label><input class="fc" id="fBai" value="${esc(im?.bairro||'')}"></div>
+      <div class="fg"><label class="fl">Cidade</label><input class="fc" id="fCid" value="${esc(im?.cidade||'')}"></div>
+      <div class="fg"><label class="fl">Estado</label><input class="fc" id="fEst" maxlength="2" value="${esc(im?.estado||'')}"></div>
+    </div>
+    <div class="sdiv">Características</div>
+    <div class="frow3">
+      <div class="fg"><label class="fl">Área (m²)</label><input class="fc" id="fArea" type="number" value="${im?.area||''}"></div>
+      <div class="fg"><label class="fl">Quartos</label><input class="fc" id="fQto" type="number" value="${im?.quartos||''}"></div>
+      <div class="fg"><label class="fl">Suítes</label><input class="fc" id="fSui" type="number" value="${im?.suites||''}"></div>
+    </div>
+    <div class="frow3">
+      <div class="fg"><label class="fl">Banheiros</label><input class="fc" id="fBan" type="number" value="${im?.banheiros||''}"></div>
+      <div class="fg"><label class="fl">Vagas</label><input class="fc" id="fVag" type="number" value="${im?.vagas||''}"></div>
+      <div class="fg"><label class="fl">Condomínio (R$)</label><input class="fc" id="fCon" type="number" value="${im?.condominio||''}"></div>
+    </div>
+    <div class="sdiv">Fotos</div>
+    <div class="fg"><label class="fl">URLs (uma por linha)</label><textarea class="fc" id="fFot" rows="3">${(im?.fotos||[]).join('\n')}</textarea></div>
+    <div class="sdiv">Descrição</div>
+    <div class="fg"><textarea class="fc" id="fDes" rows="4" placeholder="Descrição do imóvel...">${esc(im?.descricao||'')}</textarea></div>
+    <div class="sdiv">Comodidades</div>
+    <div class="chars-g">${chkHtml}</div>
+    <div class="frow" style="margin-top:8px">
+      <label style="display:flex;align-items:center;gap:8px;padding:10px;background:#f8fafc;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600">
+        <input type="checkbox" id="fDest" ${im?.destaque?'checked':''} style="accent-color:var(--pri2);width:15px;height:15px"> Marcar como destaque
+      </label>
+      <label style="display:flex;align-items:center;gap:8px;padding:10px;background:#f8fafc;border-radius:8px;cursor:pointer;font-size:13px;font-weight:600">
+        <input type="checkbox" id="fAtv" ${!im||im.ativo?'checked':''} style="accent-color:var(--pri2);width:15px;height:15px"> Imóvel ativo
+      </label>
+    </div>
+    <div class="modal-acts">
+      <button class="btn-cn" onclick="closeForm()">Cancelar</button>
+      <button class="btn-sv" onclick="saveImovel()">${im?'Salvar alterações':'Cadastrar imóvel'}</button>
+    </div>`;
+
+  document.getElementById('formOv').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+
+function closeForm() {
+  document.getElementById('formOv').classList.remove('open');
+  document.body.style.overflow='';
+}
+
+async function saveImovel() {
+  const titulo = document.getElementById('fTit').value.trim();
+  const preco  = parseFloat(document.getElementById('fPrc').value)||0;
+  if (!titulo || !preco) { toast('Título e preço são obrigatórios','err'); return; }
+
+  const fotos = document.getElementById('fFot').value.trim().split('\n').map(s=>s.trim()).filter(Boolean);
+  const caracteristicas = Array.from(document.querySelectorAll('#formBox .chars-g input:checked')).map(c=>c.value);
+
+  const body = {
+    titulo, preco,
+    tipo:        document.getElementById('fTipo').value,
+    finalidade:  document.getElementById('fFin').value,
+    area:        parseFloat(document.getElementById('fArea').value)||0,
+    quartos:     parseInt(document.getElementById('fQto').value)||0,
+    suites:      parseInt(document.getElementById('fSui').value)||0,
+    banheiros:   parseInt(document.getElementById('fBan').value)||0,
+    vagas:       parseInt(document.getElementById('fVag').value)||0,
+    condominio:  parseFloat(document.getElementById('fCon').value)||null,
+    bairro:      document.getElementById('fBai').value.trim(),
+    cidade:      document.getElementById('fCid').value.trim(),
+    estado:      document.getElementById('fEst').value.trim().toUpperCase(),
+    descricao:   document.getElementById('fDes').value.trim(),
+    fotos, caracteristicas,
+    destaque:    document.getElementById('fDest').checked,
+    ativo:       document.getElementById('fAtv').checked,
+  };
+
+  try {
+    if (editId) {
+      await api(`/imoveis/${editId}`, { method:'PUT', body:JSON.stringify(body) });
+      toast('Imóvel atualizado!','ok');
+    } else {
+      await api('/imoveis', { method:'POST', body:JSON.stringify(body) });
+      toast('Imóvel cadastrado!','ok');
+    }
+    closeForm();
+    await loadImoveis();
+    renderStats();
+  } catch (e) {
+    toast('Erro ao salvar: '+e.message,'err');
+  }
+}
+
+async function delImovel(id) {
+  if (!confirm('Excluir este imóvel?')) return;
+  try {
+    await api(`/imoveis/${id}`, { method:'DELETE' });
+    toast('Imóvel excluído','ok');
+    await loadImoveis();
+    renderStats();
+  } catch {
+    toast('Erro ao excluir','err');
+  }
+}
+
+/* ── Keyboard ── */
+document.addEventListener('keydown', e => { if(e.key==='Escape') closeForm(); });
+document.getElementById('formOv').addEventListener('click', e => { if(e.target===e.currentTarget) closeForm(); });
+
+/* ── Helpers ── */
+function esc(s) { const d=document.createElement('div'); d.textContent=s||''; return d.innerHTML; }
+
+function toast(msg, type='info') {
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  t.textContent = msg;
+  document.getElementById('tct').appendChild(t);
+  setTimeout(()=>t.remove(), 3200);
+}
+</script>
+</body>
+</html>
